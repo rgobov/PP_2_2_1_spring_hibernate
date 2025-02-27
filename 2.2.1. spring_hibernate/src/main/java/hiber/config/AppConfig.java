@@ -1,5 +1,6 @@
 package hiber.config;
 
+import hiber.model.Car;
 import hiber.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -45,7 +46,7 @@ public class AppConfig {
       props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 
       factoryBean.setHibernateProperties(props);
-      factoryBean.setAnnotatedClasses(User.class);
+      factoryBean.setAnnotatedClasses(User.class, Car.class);
       return factoryBean;
    }
 
@@ -54,5 +55,35 @@ public class AppConfig {
       HibernateTransactionManager transactionManager = new HibernateTransactionManager();
       transactionManager.setSessionFactory(getSessionFactory().getObject());
       return transactionManager;
+   }
+
+   @Bean
+   public Car mersedes() {
+      Car car = new Car();
+      car.setModel("mersedes");
+      car.setSeries(1234);
+      return car;
+   }
+   @Bean
+   public Car bmw() {
+      Car car = new Car();
+      car.setModel("bmw");
+      car.setSeries(1235);
+      return car;
+   }
+   @Bean
+   public Car audi() {
+      Car car = new Car();
+      car.setModel("audi");
+      car.setSeries(1236);
+      return car;
+   }
+
+   @Bean
+   public Car kia() {
+      Car car = new Car();
+      car.setModel("kia");
+      car.setSeries(1237);
+      return car;
    }
 }
